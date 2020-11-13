@@ -19,8 +19,8 @@ class Model:
     '''
 
     def __init__(self, modelName, modelID=None):
-        self.__modelName = modelName
         self.__modelID = modelID
+        self.__modelName = modelName
 
     def getModelID(self):
         return self.__modelID

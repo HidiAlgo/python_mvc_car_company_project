@@ -106,3 +106,6 @@ class Car:
 
     def setStatus(self, status):
         self.__status = status
+
+
+print(Car.__doc__)
