@@ -1,3 +1,9 @@
+sellers=[
+    {'email': 'perera@sellerMail.com', 'password': '000', 'name': 'Perera'},
+    {'email': 'piyal@sellerMail.com', 'password': '111', 'name': 'Piyal'},
+    {'email': 'sahan@sellerMail.com', 'password': '222', 'name': 'Sahan'}
+]
+
 officeStaff=[
     {'email': 'nishan@officeMail.com', 'password': '123', 'name':'Nishan'},
     {'email': 'saman@officeMail.com', 'password': '456', 'name':'Saman'},

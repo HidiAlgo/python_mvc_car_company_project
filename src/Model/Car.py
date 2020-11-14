@@ -42,7 +42,7 @@ class Car:
         setUpgrades()
         setStatus
     '''
-    def __init__(self, rNumber, cName, color, price, numOfDoors, cModel, cManufacturer, upgrades=None, status=False ):
+    def __init__(self, rNumber, cName, color, price, numOfDoors, cModel, cManufacturer, upgrades=None, status=0 ):
         self.__registrationNumber = rNumber
         self.__carName = cName
         self.__color = color
@@ -107,5 +107,3 @@ class Car:
     def setStatus(self, status):
         self.__status = status
 
-
-print(Car.__doc__)

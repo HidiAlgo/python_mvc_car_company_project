@@ -17,7 +17,7 @@ class Manufacturer:
         setManufacturerID()
         setManufacturerName()
     '''
-    def __init__(self, manufacturerID, manufacturerName):
+    def __init__(self, manufacturerName, manufacturerID=None):
         self.__manufacturerID = manufacturerID
         self.__manufacturerName = manufacturerName
 
