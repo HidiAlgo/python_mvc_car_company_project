@@ -1,19 +1,24 @@
 import src.Controller.Data as Data
+import src.Controller.DatabaseController as DB
+from src.Model.OfficeMember import OfficeMember
+from src.Model.Seller import Seller
+
 
 def authenticateOfficeStaff(email, password):
-        for member in Data.officeStaff:
-            if member['email'] == email and member['password'] == password:
-                return True
-        else:
-            return False
+       auth = DB.selectMember(email, password)
+       if auth!=None:
+           member = OfficeMember(auth[0], auth[1], auth[2])
+           return member
+       else:
+           return None
 
 def authenticateSeller(email, password):
-        for member in Data.sellers:
-            if member['email'] == email and member['password'] == password:
-                return True
-        else:
-            return False
-
+    auth = DB.selectSeller(email, password)
+    if auth!=None:
+        seller = Seller(auth[0], auth[1], auth[2])
+        return seller
+    else:
+        return None
 
 
 

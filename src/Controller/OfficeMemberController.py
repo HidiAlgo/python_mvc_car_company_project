@@ -1,5 +1,4 @@
 from src.Controller.StaffController import StaffController
-import src.Controller.Data as Data
 from src.Model.Car import Car
 from src.Model.Model import Model
 from src.Model.Manufacturer import Manufacturer
@@ -33,31 +32,23 @@ class OfficeMemberController(StaffController):
 
 
 
-    def addACar(self, car):
+    def addACar(self, car, email):
         if type(car) is Car:
-            DB.insertCar(car)
+            DB.insertCar(car, email)
         else:
             print("TYPE ERROR")
 
 
 
     def removeACar(self, registrationNumber):
-        try:
-            index = None
-            for i in range(len(Data.cars)):
-                if Data.cars[i]['registrationID'] == registrationNumber:
-                    index = i
-                    break
-            if index != None:
-                del Data.cars[index]
-            else:
-                print("NOT FOUND")
-        except Exception as e:
-            print(e)
+        DB.removeCar(registrationNumber)
 
 
     def viewSoldCars(self):
-        result = list(filter(lambda x: (x['status'] == False), Data.cars))
+        rows = DB.selectAllCars()
+        result = list(filter(lambda x: x[5] == 1, rows))
         return result
 
 
+    def moreDetailsForSoldCar(self, regNumber):
+        return DB.selectSoldCar(regNumber)

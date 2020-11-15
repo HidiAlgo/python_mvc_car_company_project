@@ -1,0 +1,7 @@
+Future
+	The user who entered the car should be able to delete it
+	Not all the upgratdes are abailable to all the cars only the upgrades which can be used o that car should be shown
+	
+
+
+

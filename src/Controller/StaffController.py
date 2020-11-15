@@ -40,5 +40,8 @@ class StaffController:
 
     def viewAvailableCars(self):
         rows = DB.selectAllCars()
-        result = filter(lambda x: x['status'] == 0, rows)
-        print(result)
+        result = list(filter(lambda x: x[5] == 0, rows))
+        return result
+
+    def viewUpgrades(self):
+        return DB.selectAllUpgrades()
