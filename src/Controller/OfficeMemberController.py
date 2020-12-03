@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from src.Controller import StaffController as admin, DatabaseController as DB
+=======
+from src.Controller.StaffController import StaffController
+>>>>>>> 90d5572012b5a6f3a7ea57cd10217bdc5ff740e1
 from src.Model.Car import Car
 from src.Model.Model import Model
 from src.Model.Manufacturer import Manufacturer
@@ -45,12 +49,16 @@ class OfficeMemberController(admin.StaffController):
 
     def addACar(self, car, email):
         if type(car) is Car:
+<<<<<<< HEAD
             try:
                 DB.insertCar(car, email)
                 return True
             except Exception as e:
                 print(e)
                 return False
+=======
+            DB.insertCar(car, email)
+>>>>>>> 90d5572012b5a6f3a7ea57cd10217bdc5ff740e1
         else:
             print("TYPE ERROR")
 
@@ -68,6 +76,7 @@ class OfficeMemberController(admin.StaffController):
 
     def moreDetailsForSoldCar(self, regNumber):
         return DB.selectSoldCar(regNumber)
+<<<<<<< HEAD
 
     def addAnUpgrade(self, name, price):
         if price.isnumeric():
@@ -85,3 +94,5 @@ class OfficeMemberController(admin.StaffController):
             return True
         else:
             return False
+=======
+>>>>>>> 90d5572012b5a6f3a7ea57cd10217bdc5ff740e1

@@ -90,11 +90,15 @@ def selectAllCars():
 
 def removeCar(registration_number):
     try:
+<<<<<<< HEAD
         cur.execute("delete from car where registration_number=?",(registration_number,))
         conn.commit()
         cur.execute("delete from orders where carID = ?",(registration_number,))
         conn.commit()
         cur.execute("delete from sells where carID = ?",(registration_number,))
+=======
+        cur.execute("delete from manufacturer where id=?",(registration_number,))
+>>>>>>> 90d5572012b5a6f3a7ea57cd10217bdc5ff740e1
         conn.commit()
     except Exception as e:
         print(e)
@@ -103,7 +107,11 @@ def sellCar(regNumber, upgrades, price,email, date, time):
     cur.execute("update car set status=1, price=? where registration_number=?",(price,regNumber))
     conn.commit()
     for u in upgrades:
+<<<<<<< HEAD
         cur.execute("insert into orders(carID, upgradeID) values(?,?)",(regNumber, u))
+=======
+        cur.execute("insert into orders(carID, upgradeID) values(?,?)",(regNumber, u[0]))
+>>>>>>> 90d5572012b5a6f3a7ea57cd10217bdc5ff740e1
         conn.commit()
     cur.execute("insert into sells(carID, seller, date, time) values(?,?,?,?)",(regNumber,email,date,time))
     conn.commit()
@@ -130,6 +138,7 @@ def selectAllUpgrades():
     cur.execute("select * from upgrade")
     rows = cur.fetchall()
     return rows
+<<<<<<< HEAD
 
 def insertUpgrade(name, price):
         cur.execute("insert into upgrade(name, price) values(?, ?)",(name, price))
@@ -144,6 +153,8 @@ def updateUpgrade(upgradeID, name, price):
         conn.commit()
     except Exception as e:
         print(e)
+=======
+>>>>>>> 90d5572012b5a6f3a7ea57cd10217bdc5ff740e1
 #--------------------------------------------------------------------------------------
 
 
@@ -162,6 +173,7 @@ def selectSeller(email, password):
 
 #---------------------------------------------------------------------------------------
 
+<<<<<<< HEAD
 def registerMember(email, password, name):
     cur.execute("insert into staff_member values(?,?,?)",(email, password, name))
     conn.commit()
@@ -202,3 +214,5 @@ def searchCar(key):
             return result
     else:
         return None
+=======
+>>>>>>> 90d5572012b5a6f3a7ea57cd10217bdc5ff740e1
