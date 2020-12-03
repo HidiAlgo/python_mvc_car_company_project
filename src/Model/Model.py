@@ -1,22 +1,4 @@
 class Model:
-    '''
-    This is the Model class, this class maintains the details for a model.
-    ----------------------------------------------------------------------------------
-
-    PRIVATE ATTRIBUTES:-
-    --------------------
-        __modelID: int
-            an auto generated/ manually added ID
-        __modelName: str
-            a specific name for a model
-
-    METHODS:-
-    ---------
-        getManufacturerID()
-        getManufacturerName()
-        setManufacturerID()
-        setManufacturerName()
-    '''
 
     def __init__(self, modelName, modelID=None):
         self.__modelID = modelID

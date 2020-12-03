@@ -1,14 +1,10 @@
-from src.Controller.StaffController import StaffController
-import src.Controller.Data as Data
+from src.Controller import StaffController as admin, DatabaseController as DB
 from src.Model.Car import Car
 from src.Model.Model import Model
 from src.Model.Manufacturer import Manufacturer
-import src.Controller.DatabaseController as DB
 
 
-
-
-class OfficeMemberController(StaffController):
+class OfficeMemberController(admin.StaffController):
 
     def addAModel(self, model):
         if type(model) is Model:
@@ -18,7 +14,17 @@ class OfficeMemberController(StaffController):
 
 
     def removeAModel(self, modelID):
-       DB.removeModel(modelID)
+        try:
+            DB.removeModel(modelID)
+            return True
+        except Exception as e:
+            return False
+
+    def updateAModel(self, modelID, name):
+        DB.updateModel(modelID, name)
+
+    def updateAManufacturer(self, manufacturerID, name):
+        DB.updateManufacturer(manufacturerID, name)
 
 
     def addAManufacturer(self, manufacturer):
@@ -29,35 +35,53 @@ class OfficeMemberController(StaffController):
 
 
     def removeAManufacturer(self, manufacturerID):
-        DB.removeManufacturer(manufacturerID)
+        try:
+            DB.removeManufacturer(manufacturerID)
+            return True
+        except:
+            return False
 
 
 
-    def addACar(self, car):
+    def addACar(self, car, email):
         if type(car) is Car:
-            DB.insertCar(car)
+            try:
+                DB.insertCar(car, email)
+                return True
+            except Exception as e:
+                print(e)
+                return False
         else:
             print("TYPE ERROR")
 
 
 
     def removeACar(self, registrationNumber):
-        try:
-            index = None
-            for i in range(len(Data.cars)):
-                if Data.cars[i]['registrationID'] == registrationNumber:
-                    index = i
-                    break
-            if index != None:
-                del Data.cars[index]
-            else:
-                print("NOT FOUND")
-        except Exception as e:
-            print(e)
+        DB.removeCar(registrationNumber)
 
 
     def viewSoldCars(self):
-        result = list(filter(lambda x: (x['status'] == False), Data.cars))
+        rows = DB.selectAllCars()
+        result = list(filter(lambda x: x[5] == 1, rows))
         return result
 
 
+    def moreDetailsForSoldCar(self, regNumber):
+        return DB.selectSoldCar(regNumber)
+
+    def addAnUpgrade(self, name, price):
+        if price.isnumeric():
+            DB.insertUpgrade(name, price)
+            return True
+        else:
+            return False
+
+    def deleteAnUpgrade(self, upgradeID):
+        DB.removeUpgrade(upgradeID)
+
+    def updateAnUpgrade(self, id, name, price):
+        if price.isnumeric():
+            DB.updateUpgrade(id, name, price)
+            return True
+        else:
+            return False

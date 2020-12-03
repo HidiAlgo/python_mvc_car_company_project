@@ -1,35 +1,24 @@
-import src.Controller.Data as Data
-from src.Model.OfficeMember import OfficeMember
-from src.Model.Seller import Seller
-import src.Controller.DatabaseController as DB
+from src.Controller import DatabaseController as DB
+
 
 class StaffController:
-    def searchCarsByModelOrManufacturer(self):
-        pass
+    def searchCarsByModelOrManufacturer(self, key):
+        return DB.searchCar(key)
 
     def addAnOfficeMember(self, officeMember):
-        if type(officeMember) is OfficeMember:
-            member = {}
-            member['email'] = officeMember.getOfficeMemberEmail()
-            member['password'] = officeMember.getOfficeMemberPassword()
-            member['name'] = officeMember.getOfficeMemberName()
-
-            Data.officeStaff.append(member)
-
-        else:
-            print("TYPE ERROR")
+        try:
+            DB.registerMember(officeMember.getOfficeMemberEmail(),
+                              officeMember.getOfficeMemberPassword(), officeMember.getOfficeMemberName())
+            return True
+        except Exception as e:
+            return False
 
     def addAnSeller(self, seller):
-        if type(seller) is Seller:
-            s = {}
-            s['email'] = seller.getSellerEmail()
-            s['password'] = seller.getSellerPassword()
-            s['name'] = seller.getSellerName()
-
-            Data.seller.append(s)
-
-        else:
-            print("TYPE ERROR")
+        try:
+            DB.registerSeller(seller.getSellerEmail(),seller.getSellerPassword(), seller.getSellerName())
+            return True
+        except Exception as e:
+            return False
 
 
     def viewAvailableManufacturers(self):
@@ -40,5 +29,8 @@ class StaffController:
 
     def viewAvailableCars(self):
         rows = DB.selectAllCars()
-        result = filter(lambda x: x['status'] == 0, rows)
-        print(result)
+        result = list(filter(lambda x: x[5] == 0, rows))
+        return result
+
+    def viewUpgrades(self):
+        return DB.selectAllUpgrades()

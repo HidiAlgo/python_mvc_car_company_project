@@ -10,7 +10,8 @@ class Upgrade:
         __upgradeName: str
             a specific name for a model
         __upgradePrice: ing
-            the cost of an upgrade
+            the cost of
+            an upgrade
 
     METHODS:-
     ---------
